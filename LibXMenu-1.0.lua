@@ -106,7 +106,7 @@ local function AddToggle(self, lvl, text, value, arg1, arg2, func)
 	else
 		self.info.checked = self.db[value]
 	end
-	self.AddButton(self, lvl, text, 1)
+	AddButton(self, lvl, text, 1)
 end
 
 --[[
@@ -124,7 +124,7 @@ local function AddList(self, lvl, text, value)
 	self.info.value = value
 	self.info.hasArrow = true
 	self.info.func = HideCheck
-	self.AddButton(self, lvl, text, 1)
+	AddButton(self, lvl, text, 1)
 end
 
 --[[
@@ -185,7 +185,7 @@ local function AddSelect(self, lvl, text, value, arg1, arg2, func)
 	else
 		self.info.checked = self.db[value] == value
 	end
-	self.AddButton(self, lvl, text, 1)
+	AddButton(self, lvl, text, 1)
 end
 
 --[[
@@ -223,7 +223,7 @@ local function AddColor(self, lvl, text, value)
 	self.info.swatchFunc, self.info.opacityFunc, self.info.cancelFunc = SetColor, SetColor, SetColor
 	self.info.value = value
 	self.info.func = UIDropDownMenuButton_OpenColorPicker
-	self.AddButton(self, lvl, text, nil)
+	AddButton(self, lvl, text, nil)
 end
 
 --[[
@@ -236,7 +236,7 @@ local function AddTitle(self, lvl, text)
 	if not lvl then return end
 	if not text then return end
 	self.info.isTitle = true
-	self.AddButton(self, lvl, text)
+	AddButton(self, lvl, text)
 end
 
 --[[
@@ -249,7 +249,7 @@ local function AddCloseButton(self, lvl, text)
 	if not lvl then return end
 	if not text then return end
 	self.info.func = function() CloseDropDownMenus() end
-	self.AddButton(self, lvl, text)
+	AddButton(self, lvl, text)
 end
 
 --[[
