@@ -189,7 +189,7 @@ local function AddSelect(self, lvl, text, value, arg1, arg2, func)
 end
 
 --[[
-	lib:AddButton
+	lib:AddColor
 		(NOTE:)	A color table must be first established before using this function
 	lvl					- menu level 1,2,3 etc...
 	text				- name of the menu item
