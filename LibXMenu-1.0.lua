@@ -79,9 +79,10 @@ end
 	arg1				- custom database variable, if arg2 is nil then value is used as element.  Example:  arg1[value]
 	arg2				- custom database element for arg1.  Example:  arg1[arg2]
 	func				- define custom function for menu item
+	bOpt				- define an optional variable to be passed to doUpdate. Example: button name or button ID.
 --]]
 
-local function AddToggle(self, lvl, text, value, arg1, arg2, func)
+local function AddToggle(self, lvl, text, value, arg1, arg2, func, bOpt)
 	if not lvl then return end
 	if not text then return end
 	if not value then return end
@@ -97,7 +98,7 @@ local function AddToggle(self, lvl, text, value, arg1, arg2, func)
 		else
 			item.owner.db[item.value] = not item.owner.db[item.value]
 		end
-		if item.owner.doUpdate then item.owner.doUpdate() end
+		if item.owner.doUpdate then item.owner.doUpdate(bOpt) end
 	end
 	if arg1 and arg2 then
 		self.info.checked = arg1[arg2]
@@ -140,9 +141,10 @@ end
 	arg2				- 	custom database variable, if arg1 then acts as an element in arg1 table. Example: arg1[arg2]
 							if not arg1 then arg2 is used as custom database table with value as element.  Example: arg2[value]
 	func				- define custom function for menu item
+	bOpt				- define an optional variable to be passed to doUpdate. Example: button name or button ID.
 --]]
 
-local function AddSelect(self, lvl, text, value, arg1, arg2, func)
+local function AddSelect(self, lvl, text, value, arg1, arg2, func, bOpt)
 	if not lvl then return end
 	if not text then return end
 	if not value then return end
@@ -174,7 +176,7 @@ local function AddSelect(self, lvl, text, value, arg1, arg2, func)
 				end
 			end
 		end
-		if item.owner.doUpdate then item.owner.doUpdate() end
+		if item.owner.doUpdate then item.owner.doUpdate(bOpt) end
 	end
 	if arg1 and arg2 then
 		self.info.checked = arg1[arg2] == value
@@ -194,9 +196,10 @@ end
 	lvl					- menu level 1,2,3 etc...
 	text				- name of the menu item
 	value				- database element value or name. Example: db[value]
+	bOpt				- define an optional variable to be passed to doUpdate. Example: button name or button ID.
 --]]
 
-local function AddColor(self, lvl, text, value)
+local function AddColor(self, lvl, text, value, bOpt)
 	if not lvl then return end
 	if not text then return end
 	if not value then return end
@@ -215,7 +218,7 @@ local function AddColor(self, lvl, text, value)
 			a = 1 - OpacitySliderFrame:GetValue()
 		end
 		colDB.r, colDB.g, colDB.b, colDB.a = r, g, b, a
-		if _G[self:GetName()].doUpdate then _G[self:GetName()].doUpdate() end
+		if _G[self:GetName()].doUpdate then _G[self:GetName()].doUpdate(bOpt) end
 	end
 	self.info.hasColorSwatch = true
 	self.info.hasOpacity = 1
