@@ -25,15 +25,18 @@
 					end
 				elseif sub == "advancelist" then
 					--several different ways of adding selects
-					self:AddSelect(lvl, i, i, db, "dboption1", nil)
-					self:AddSelect(lvl, i, i, "dboption2", nil)
-					self:AddSelect(lvl, i, i, nil, nil)
+					self:AddSelect(lvl, "This button 1", "button1", db, "dboption1", nil, 1)
+					self:AddSelect(lvl, "This button 2", "button2", "dboption2", nil, nil, 2)
+					self:AddSelect(lvl, "This button 3", "button3", nil, nil, nil, 3)
 				end
 			end
 		end
-		dd1.doUpdate = function()
+		dd1.doUpdate = function(bOpt)
 			--fired after every menu selection click
 			doDisplayUpdates();
+			if bOpt == 1 then
+				--do something, bOpt is optional tag attached to a button
+			end
 		end
 		
 		ToggleDropDownMenu(1, nil, dd1, "cursor")
