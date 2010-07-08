@@ -93,6 +93,7 @@ local function AddToggle(self, lvl, text, value, arg1, arg2, func, bOpt)
 	value = tonumber(value) or value
 	self.info.arg1 = arg1
 	self.info.arg2 = arg2
+	self.info.value = value
 	self.info.func = func or function(item, arg1, arg2)
 		if arg1 and arg2 then
 			arg1[arg2] = not arg1[arg2]
