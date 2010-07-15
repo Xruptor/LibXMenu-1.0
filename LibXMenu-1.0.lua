@@ -43,7 +43,7 @@
 		
 --]]
 
-local MAJOR, MINOR = "LibXMenu-1.0", 1
+local MAJOR, MINOR = "LibXMenu-1.0", 2
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -79,6 +79,7 @@ end
 	lvl					- menu level 1,2,3 etc...
 	text				- name of the menu item
 	value				- element in the database table, used when arg1 and arg2 are both nil.  Example:  db[value]
+						  NOTE: Value of the database element must be a boolean value.  TRUE/FALSE. Example: db[value] = true
 	arg1				- custom database variable, if arg2 is nil then value is used as element.  Example:  arg1[value]
 	arg2				- custom database element for arg1.  Example:  arg1[arg2]
 	func				- define custom function for menu item
@@ -89,7 +90,7 @@ local function AddToggle(self, lvl, text, value, arg1, arg2, func, bOpt)
 	if not lvl then return end
 	if not text then return end
 	if not value then return end
-	
+
 	value = tonumber(value) or value
 	self.info.arg1 = arg1
 	self.info.arg2 = arg2
@@ -140,6 +141,7 @@ end
 							If arg1 and arg2 then value is stored in the arg1[arg2] table.
 							If arg1 and not arg2 then value is stored in db[arg1] table.
 							if not arg1 and arg2 then value is stored in arg2[value] table.
+							if not arg1 and not arg2 then value is stored in db[value] table.
 	arg1				- 	custom database variable, if arg2 then acts as primary database. Example: arg1[arg2]
 							if not arg2 then arg1 is used as an element of the database table.  Example: db[arg1]
 	arg2				- 	custom database variable, if arg1 then acts as an element in arg1 table. Example: arg1[arg2]
@@ -266,8 +268,10 @@ end
 --]]
 
 function lib:New(selfName, db)
-	if not selfName then print("LibXMenu-1.0: Error, DropDown requires a name") return end
-	if not db then print("LibXMenu-1.0: Error, DropDown requires a Database") return end
+	if not selfName then assert(false, "LibXMenu-1.0: Error, DropDown requires a name") return end
+	if not db then assert(false, "LibXMenu-1.0: Error, DropDown requires a Database.") return end
+	--Note: If you don't want to use a database, just use an empty table {}.
+	--Ex.  local dd1 = LibStub('LibXMenu-1.0'):New("DropDownName", {})
 	
 	local dd = CreateFrame("Frame", selfName, UIParent)
 	dd.db = db
