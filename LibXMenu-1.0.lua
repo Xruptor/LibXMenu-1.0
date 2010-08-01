@@ -42,7 +42,7 @@
 		
 --]]
 
-local MAJOR, MINOR = "LibXMenu-1.0", 3
+local MAJOR, MINOR = "LibXMenu-1.0", 4
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
