@@ -134,7 +134,6 @@ local function AddList(self, lvl, text, value, notCheckable)
 	else
 		self.info.notCheckable = true
 	end
-	self.info.notCheckable = notCheckable or true
 	AddButton(self, lvl, text, 1)
 end
 
